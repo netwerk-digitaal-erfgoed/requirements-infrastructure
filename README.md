@@ -23,7 +23,7 @@ Guiding principles of these requirements are:
 
 A clear separation between the application and the infrastructure it runs on. 
 The application code should not contain infrastructure specifics and be portable so application instances can be hosted by multiple parties, including developers that want to run or debug the application locally.
-The infrastructure, on their other hand, should not have to change to accommodate the application.
+The infrastructure, in turn, should not have to change to accommodate the application.
 
 ### AUTO 
 
