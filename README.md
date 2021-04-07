@@ -62,7 +62,7 @@ Both software developers and end-users need reliable and performant services to 
 4. The infrastructure can **configure applications** through [environment variables](https://12factor.net/config). (SEP)
 5. The infrastructure **captures application logs** at [stdout](https://12factor.net/logs). (SEP)
 6. The infrastructure **aggregates those logs** and makes them available through a command-line and/or web interface.
-7. The infrastructure **automatically builds** the application source when commits are pushed to the application repository, producing in a OCI container build artefact. (AUTO)
+7. The infrastructure **automatically builds** the application source when commits are pushed to the application repository, producing in an OCI container build artefact. (AUTO)
 8. The infrastructure **automatically runs application tests** when commits are pushed to the application repository. (AUTO)
 9. The infrastructure **automatically deploys** new application versions to an acceptance and/or production environment. (AUTO)
 10. The infrastructure is **highly available** corresponding to the infrastructure supplier’s SLA:
