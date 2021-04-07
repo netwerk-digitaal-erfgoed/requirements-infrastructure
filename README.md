@@ -13,7 +13,7 @@ This document is aimed at organisations that would like to take ownership of (â€
 The requirements are based on modern DevOps best practices, including [Twelve-Factor](https://12factor.net).
 They have inspired the [current NDE infrastructure](https://github.com/netwerk-digitaal-erfgoed/infrastructure).
 By joining us in following these practices,
-organisations will help enable the longevity and adoption and of the applications.
+organisations will help enable the longevity and adoption of the applications.
 
 ## Principles
 
