@@ -68,11 +68,14 @@ Containers are self-sufficient (without external dependencies) and uniform (they
 This makes them decoupled from infrastructure specifics (such as the OS used by the infrastructure provider).
 The same container can be run on any Linux distribution as well as on a developer’s local Mac or Windows machine.
 
-#### 2. The infrastructure includes a container registry or can connect to an existing **container registry** that built containers will be pushed to. ([SEP](#sep))
+#### 2. The infrastructure connects to a **container registry** that built containers will be pushed to. ([SEP](#sep))
 
-Built containers are stored in a container registry (such as [GHCR](https://github.com/features/packages)).
+Built containers are stored in a container registry.
+This can be an external registry, such as as [GHCR](https://github.com/features/packages)
+or one provided by the infrastructure itself.
+
 The built artifacts must be accessible not only to the infrastructure itself but also to outside collaborators,
-who can then run those same containers locally, too.
+who can then run those same containers locally.
 
 #### 3. The infrastructure runs _stateful applications_ (such as triple stores).
 
@@ -86,7 +89,7 @@ Traditionally, logs are written by applications to a log file or an API (such as
 This couples the application to the infrastructure it runs on.
 To safeguard proper separation, the infrastructure must capture application logs at the [standard output stream]([stdout](https://12factor.net/logs)) (`stdout`). 
 
-#### 6. The infrastructure _aggregates logs_ and makes them available through a command-line and/or web interface.
+#### 6. The infrastructure _aggregates logs_ and makes them available through a command-line and/or web interface. ([REL](#rel))
 
 To see what is going on in the running application (observability),
 developers as well as operations must be able to search through logs efficiently.
