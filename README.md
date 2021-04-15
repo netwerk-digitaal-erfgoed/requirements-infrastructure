@@ -95,10 +95,10 @@ To see what is going on in the running application (observability),
 developers as well as operations must be able to search through logs efficiently.
 This is especially relevant when multiple container instances of the application are running in parallel.
 
-#### 7. The infrastructure _automatically builds_ the application.
+#### 7. The infrastructure _automatically builds_ the application. ([AUTO](#auto))
 
 When commits are pushed to the application source code, the infrastructure must automatically (re)build the application,
-producing an OCI container build artefact. ([AUTO](#auto))
+producing an OCI container build artefact.
 
 #### 8. The infrastructure _automatically runs application tests_ when commits are pushed to the application repository. ([AUTO](#auto))
 
@@ -106,9 +106,9 @@ Automated tests prevent regressions only when they are run automatically on a st
 
 #### 9. The infrastructure _automatically deploys_ new application versions to an acceptance and/or production environment. ([AUTO](#auto))
 
-#### 10. The infrastructure is _highly available_ corresponding to the infrastructure supplier’s SLA
+#### 10. The infrastructure is _highly available_ corresponding to the infrastructure supplier’s SLA ([REL](#rel))
 
-At the very least there is no single point of failure and all components are redundant. ([REL](#rel))
+At the very least there is no single point of failure and all components are redundant.
 
 #### 11. The infrastructure exposes applications at _public HTTPS web endpoints_.
 
