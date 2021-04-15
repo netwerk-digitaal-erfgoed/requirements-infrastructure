@@ -54,7 +54,7 @@ Both software developers and end-users need reliable and performant services to 
         They are a form of lightweight virtualization, striking a good balance between isolation and performance.
         Containers are self-sufficient (without external dependencies) and uniform (they look the same on the outside).
         This makes them decoupled from infrastructure specifics (such as the OS used by the infrastructure provider).
-    </dd>.
+    </dd>
 </dl>
 
 ## Requirements
