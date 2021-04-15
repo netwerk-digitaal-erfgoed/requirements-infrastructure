@@ -87,7 +87,7 @@ who can then run those same containers locally.
 
 Traditionally, logs are written by applications to a log file or an API (such as Logstash) as dictated by the infrastructure.
 This couples the application to the infrastructure it runs on.
-To safeguard proper separation, the infrastructure must capture application logs at the [standard output stream]([stdout](https://12factor.net/logs)) (`stdout`). 
+To safeguard proper separation, the infrastructure must capture application logs at the [standard output stream](https://12factor.net/logs) (`stdout`). 
 
 #### 6. The infrastructure _aggregates logs_ and makes them available through a command-line and/or web interface. ([REL](#rel))
 
