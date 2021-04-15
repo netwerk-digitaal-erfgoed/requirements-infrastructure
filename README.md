@@ -48,8 +48,13 @@ Both software developers and end-users need reliable and performant services to 
     <dd>A test suite that is included with the application.</dd>
     <dt>Application data</dt>
     <dd>Data that is produced by applications, for instance data stored in databases. Also called application state.</dd>
-    <dt><a href="https://opencontainers.org">OCI</a> containers</dt>
-    <dd>Standardized containers that NDE applications are packaged in. NDE uses  containers because they are self-sufficient, have no external dependencies and are decoupled from infrastructure specifics (such as the OS used by the infrastructure).</dd>
+    <dt>Container</dt>
+    <dd>A package that contains both the application and its dependencies, 
+        standardized by the <a href="https://opencontainers.org">Open Container Initiative (OCI)</a>.
+        They are a form of lightweight virtualization, striking a good balance between isolation and performance.
+        Containers are self-sufficient (without external dependencies) and uniform (they look the same on the outside).
+        This makes them decoupled from infrastructure specifics (such as the OS used by the infrastructure provider).
+    </dd>.
 </dl>
 
 ## Requirements
