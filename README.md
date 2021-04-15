@@ -39,7 +39,10 @@ Both software developers and end-users need reliable and performant services to 
 
 <dl>
     <dt>Infrastructure</dt>
-    <dd>The set of components that enable serving applications to the public. Functions include not just hosting but also continuous integration, deployment and monitoring. These functions may be delivered by a single component or be spread over multiple components (for instance, GitHub Actions as a CI pipeline, hosting on a cluster).</dd>
+    <dd>The set of components that enable serving applications to the public.
+      Functions include not just an execution environment but also continuous integration, deployment and monitoring.
+      These functions may be delivered by a single component or be spread over multiple components (for instance, GitHub Actions as a CI pipeline, hosting on a cluster).
+    </dd>
     <dt>Application</dt>
     <dd>Any software application developed by Netwerk Digitaal Erfgoed (NDE) including supporting services such as databases.</dd>
     <dt>Application repository</dt>
@@ -51,9 +54,6 @@ Both software developers and end-users need reliable and performant services to 
     <dt>Container</dt>
     <dd>A package that contains both the application and its dependencies, 
         standardized by the <a href="https://opencontainers.org">Open Container Initiative (OCI)</a>.
-        They are a form of lightweight virtualization, striking a good balance between isolation and performance.
-        Containers are self-sufficient (without external dependencies) and uniform (they look the same on the outside).
-        This makes them decoupled from infrastructure specifics (such as the OS used by the infrastructure provider).
     </dd>
 </dl>
 
@@ -61,33 +61,81 @@ Both software developers and end-users need reliable and performant services to 
 
 ### Must have
 
-1. The infrastructure can run applications that are packaged as **OCI containers**. (SEP)
-2. The infrastructure includes a container registry or can connect to an existing **container registry** (such as [GHCR](https://github.com/features/packages)) that built containers will be pushed to. (SEP)
-3. The infrastructure runs **stateful applications** (such as triple stores).
-4. The infrastructure can **configure applications** through [environment variables](https://12factor.net/config). (SEP)
-5. The infrastructure **captures application logs** at [stdout](https://12factor.net/logs). (SEP)
-6. The infrastructure **aggregates those logs** and makes them available through a command-line and/or web interface.
-7. The infrastructure **automatically builds** the application source when commits are pushed to the application repository, producing in an OCI container build artefact. (AUTO)
-8. The infrastructure **automatically runs application tests** when commits are pushed to the application repository. (AUTO)
-9. The infrastructure **automatically deploys** new application versions to an acceptance and/or production environment. (AUTO)
-10. The infrastructure is **highly available** corresponding to the infrastructure supplier’s SLA:
-   at the very least there is no single point of failure and all components are redundant. (REL)
-11. The infrastructure exposes applications at **public HTTPS web endpoints**.
-12. The infrastructure provisions and renews **TLS certificates** for the web endpoints. (REL)
-13. The infrastructure **backs up** all application data at an agreed upon interval and has restore functionality. (REL)
-14. The infrastructure is **GDPR-compliant**, for instance in the way it stores data.
-15. Access to the infrastructure is **restricted** to authorized persons. (REL)
+#### 1. The infrastructure can run applications that are packaged as _OCI containers_. ([SEP](#sep))
+
+Containers are a form of lightweight virtualization, striking a good balance between isolation and performance.
+Containers are self-sufficient (without external dependencies) and uniform (they look the same on the outside).
+This makes them decoupled from infrastructure specifics (such as the OS used by the infrastructure provider).
+The same container can be run on any Linux distribution as well as on a developer’s local Mac or Windows machine.
+
+#### 2. The infrastructure includes a container registry or can connect to an existing **container registry** that built containers will be pushed to. ([SEP](#sep))
+
+Built containers are stored in a container registry (such as [GHCR](https://github.com/features/packages)).
+The built artifacts must be accessible not only to the infrastructure itself but also to outside collaborators,
+who can then run those same containers locally, too.
+
+#### 3. The infrastructure runs _stateful applications_ (such as triple stores).
+
+#### 4. The infrastructure can _configure applications_ through environment variables. ([SEP](#sep))
+
+[Environment variables](https://12factor.net/config) are a language- and OS-agnostic standard.
+
+#### 5. The infrastructure _captures application logs_ at stdout. ([SEP](#sep))
+
+Traditionally, logs are written by applications to a log file or an API (such as Logstash) as dictated by the infrastructure.
+This couples the application to the infrastructure it runs on.
+To safeguard proper separation, the infrastructure must capture application logs at the [standard output stream]([stdout](https://12factor.net/logs)) (`stdout`). 
+
+#### 6. The infrastructure _aggregates logs_ and makes them available through a command-line and/or web interface.
+
+To see what is going on in the running application (observability),
+developers as well as operations must be able to search through logs efficiently.
+This is especially relevant when multiple container instances of the application are running in parallel.
+
+#### 7. The infrastructure _automatically builds_ the application.
+
+When commits are pushed to the application source code, the infrastructure must automatically (re)build the application,
+producing an OCI container build artefact. ([AUTO](#auto))
+
+#### 8. The infrastructure _automatically runs application tests_ when commits are pushed to the application repository. ([AUTO](#auto))
+
+Automated tests prevent regressions only when they are run automatically on a standardized environment.
+
+#### 9. The infrastructure _automatically deploys_ new application versions to an acceptance and/or production environment. ([AUTO](#auto))
+
+#### 10. The infrastructure is _highly available_ corresponding to the infrastructure supplier’s SLA
+
+At the very least there is no single point of failure and all components are redundant. ([REL](#rel))
+
+#### 11. The infrastructure exposes applications at _public HTTPS web endpoints_.
+
+Traditionally, large parts of infrastructure are only accessible internally in the organization.
+NDE applications, however, are meant for the public and therefore must be publicly accessible over HTTPS.
+
+#### 12. The infrastructure provisions and renews _TLS certificates_ for the web endpoints. ([REL](#rel))
+
+Users must never get a ‘certificate expired’ error in their browser,
+so the infrastructure must check expirations and renew certificates automatically,
+for instance using [Let’s Encrypt](https://letsencrypt.org).
+
+#### 13. The infrastructure _backs up_ all application data at an agreed upon interval and has restore functionality. ([REL](#rel))
+
+Data loss is unacceptable, especially when that data has been provided by users.
+
+#### 14. The infrastructure is _GDPR-compliant_, for instance in the way it stores data.
+
+#### 15. Access to the infrastructure is _restricted_ to authorized persons. ([REL](#rel))
 
 ### Should have
 
-16. The infrastructure supports **zero-downtime deployments** of applications ([Blue/Green](https://martinfowler.com/bliki/BlueGreenDeployment.html) or otherwise). (REL)
-17. The infrastructure configuration is **declared in code**. Changes made to that code are automatically rolled out. (AUTO)
+16. The infrastructure supports **zero-downtime deployments** of applications ([Blue/Green](https://martinfowler.com/bliki/BlueGreenDeployment.html) or otherwise). ([REL](#rel))
+17. The infrastructure configuration is **declared in code**. Changes made to that code are automatically rolled out. ([AUTO](#auto))
 18. Authorized developers can **view the infrastructure code** and propose changes to it.
-19. The infrastructure captures **metrics**. (REL)
-20. The infrastructure supports **alerts** to be configured on log (and metrics) output, supporting notification channels such as e-mail and Slack. (REL)
+19. The infrastructure captures **metrics**. ([REL](#rel))
+20. The infrastructure supports **alerts** to be configured on log (and metrics) output, supporting notification channels such as e-mail and Slack. ([REL](#rel))
 21. The application repository is **open source** and allows third-party contributors to submit issues and propose changes.
-22. The infrastructure automatically configures **DNS** for new hostnames. (AUTO)
-23. The infrastructure **automatically scales** up and down within set limits when application usage requires it. (AUTO)
+22. The infrastructure automatically configures **DNS** for new hostnames. ([AUTO](#auto))
+23. The infrastructure **automatically scales** up and down within set limits when application usage requires it. ([AUTO](#auto))
 
 ### Could have
 
