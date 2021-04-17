@@ -138,7 +138,10 @@ Data loss is unacceptable, especially when that data has been provided by users.
 20. The infrastructure supports **alerts** to be configured on log (and metrics) output, supporting notification channels such as e-mail and Slack. ([REL](#rel))
 21. The application repository is **open source** and allows third-party contributors to submit issues and propose changes.
 22. The infrastructure automatically configures **DNS** for new hostnames. ([AUTO](#auto))
-23. The infrastructure **automatically scales** up and down within set limits when application usage requires it. ([AUTO](#auto))
+
+#### 24. The infrastructure **automatically scales** up and down within set limits when application usage requires it. ([AUTO](#auto))
+
+In the case of vertical scaling (scaling in and out) this requires load-balancing the requests to the instances.
 
 ### Could have
 
