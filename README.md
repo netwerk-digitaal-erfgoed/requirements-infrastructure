@@ -81,7 +81,8 @@ who can then run those same containers locally.
 
 #### 4. The infrastructure can _configure applications_ through environment variables. ([SEP](#sep))
 
-[Environment variables](https://12factor.net/config) are a language- and OS-agnostic standard.
+Configuration values (such as database connection strings or API URLs) must be parameterized.
+The best way to do so is with [environment variables](https://12factor.net/config), a language- and OS-agnostic standard.
 
 #### 5. The infrastructure _captures application logs_ at stdout. ([SEP](#sep))
 
