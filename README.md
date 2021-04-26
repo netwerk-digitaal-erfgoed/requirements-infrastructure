@@ -76,91 +76,143 @@ Both software developers and end-users need reliable and performant services to 
 
 ## Requirements
 
-### Must have
+The requirements are prioritized. Priorities follow the [MoSCoW method](https://en.wikipedia.org/wiki/MoSCoW_method): 
 
-#### 1. The infrastructure can run applications that are packaged as _OCI containers_. ([SEP](#sep))
+| Priority    | Explanation                                     | Applies to                 |
+| ----------- | ----------------------------------------------- | -------------------------- |
+| Must have   | The requirement is necessary                    | Requirements 1 – 15  | 
+| Should have | The requirement is important, but not necessary | Requirements 16 – 23 | 
+| Could have  | The requirement is desired, but not important   | Requirement 24             |
+
+### 1. The infrastructure can run applications that are packaged as _OCI containers_. ([SEP](#sep))
 
 Containers are a form of lightweight virtualization, striking a good balance between isolation and performance.
 Containers are self-sufficient (without external dependencies) and uniform (they look the same on the outside).
 This makes them decoupled from infrastructure specifics (such as the OS used by the infrastructure provider).
 The same container can be run on any Linux distribution as well as on a developer’s local Mac or Windows machine.
 
-#### 2. The infrastructure connects to a **container registry** that built containers will be pushed to. ([SEP](#sep))
+### 2. The infrastructure connects to a **container registry**. ([SEP](#sep))
 
-Built containers are stored in a container registry.
+Built containers  (see requirement 7) are pushed to a container registry.
 This can be an external registry, such as as [GHCR](https://github.com/features/packages)
 or one provided by the infrastructure itself.
 
 The built artifacts must be accessible not only to the infrastructure itself but also to outside collaborators,
 who can then run those same containers locally.
 
-#### 3. The infrastructure runs _stateful applications_ (such as triple stores).
+### 3. The infrastructure runs _stateful applications_ (such as triple stores).
 
-#### 4. The infrastructure can _configure applications_ through environment variables. ([SEP](#sep))
+The infrastructure can run both stateless applications (that store no state) and stateful applications.
+For the latter to work, the infrastructure must be able to persist data between application runs (for instance on data volumes). 
+
+### 4. The infrastructure can _configure applications_ through environment variables. ([SEP](#sep))
 
 Configuration values (such as database connection strings or API URLs) must be parameterized.
 The best way to do so is with [environment variables](https://12factor.net/config), a language- and OS-agnostic standard.
 
-#### 5. The infrastructure _captures application logs_ at stdout. ([SEP](#sep))
+### 5. The infrastructure _captures application logs_ at stdout. ([SEP](#sep))
 
 Traditionally, logs are written by applications to a log file or an API (such as Logstash) as dictated by the infrastructure.
 This couples the application to the infrastructure it runs on.
 To safeguard proper separation, the infrastructure must capture application logs at the [standard output stream](https://12factor.net/logs) (`stdout`). 
 
-#### 6. The infrastructure _aggregates logs_ and makes them available through a command-line and/or web interface. ([REL](#rel))
+### 6. The infrastructure _aggregates logs_ and makes them available through a command-line and/or web interface. ([REL](#rel))
 
 To see what is going on in the running application (observability),
 developers as well as operations must be able to search through logs efficiently.
 This is especially relevant when multiple container instances of the application are running in parallel.
 
-#### 7. The infrastructure _automatically builds_ the application. ([AUTO](#auto))
+### 7. The infrastructure _automatically builds_ the application. ([AUTO](#auto))
 
 When commits are pushed to the application source code, the infrastructure must automatically (re)build the application,
 producing an OCI container build artefact.
 
-#### 8. The infrastructure _automatically runs application tests_ when commits are pushed to the application repository. ([AUTO](#auto))
+### 8. The infrastructure _automatically runs application tests_ when commits are pushed to the application repository. ([AUTO](#auto))
 
 Automated tests prevent regressions only when they are run automatically on a standardized environment.
 
-#### 9. The infrastructure _automatically deploys_ new application versions to an acceptance and/or production environment. ([AUTO](#auto))
+### 9. The infrastructure _automatically delivers_ new application versions to an acceptance and/or production environment. ([AUTO](#auto))
 
-#### 10. The infrastructure is _highly available_ corresponding to the infrastructure supplier’s SLA ([REL](#rel))
+Manual steps slow down delivery to users.
+Preferably, code changes that have been committed, tested (requirements 7 and 8) and approved are delivered automatically to users at the production environment.
+
+### 10. The infrastructure is _highly available_ corresponding to the infrastructure supplier’s SLA ([REL](#rel))
 
 At the very least there is no single point of failure and all components are redundant.
 
-#### 11. The infrastructure exposes applications at _public HTTPS web endpoints_.
+### 11. The infrastructure exposes applications at _public HTTPS web endpoints_.
 
 Traditionally, large parts of infrastructure are only accessible internally in the organization.
 NDE applications, however, are meant for the public and therefore must be publicly accessible over HTTPS.
 
-#### 12. The infrastructure provisions and renews _TLS certificates_ for the web endpoints. ([REL](#rel))
+### 12. The infrastructure provisions and renews _TLS certificates_ for the web endpoints. ([REL](#rel))
 
 Users must never get a ‘certificate expired’ error in their browser,
 so the infrastructure must check expirations and renew certificates automatically,
 for instance using [Let’s Encrypt](https://letsencrypt.org).
 
-#### 13. The infrastructure _backs up_ all application data at an agreed upon interval and has restore functionality. ([REL](#rel))
+### 13. The infrastructure _backs up_ all application data at an agreed upon interval and has restore functionality. ([REL](#rel))
 
 Data loss is unacceptable, especially when that data has been provided by users.
 
-#### 14. The infrastructure is _GDPR-compliant_, for instance in the way it stores data.
+### 14. The infrastructure is _GDPR-compliant_, for instance in the way it stores data.
 
-#### 15. Access to the infrastructure is _restricted_ to authorized persons. ([REL](#rel))
+If the infrastructure stores personal data, for instance logs, this must be done in a GDPR-compliant manner.
 
-### Should have
+### 15. Access to the infrastructure is _restricted_. ([REL](#rel))
 
-16. The infrastructure supports **zero-downtime deployments** of applications ([Blue/Green](https://martinfowler.com/bliki/BlueGreenDeployment.html) or otherwise). ([REL](#rel))
-17. The infrastructure configuration is **declared in code**. Changes made to that code are automatically rolled out. ([AUTO](#auto))
-18. Authorized developers can **view the infrastructure code** and propose changes to it.
-19. The infrastructure captures **metrics**. ([REL](#rel))
-20. The infrastructure supports **alerts** to be configured on log (and metrics) output, supporting notification channels such as e-mail and Slack. ([REL](#rel))
-21. The application repository is **open source** and allows third-party contributors to submit issues and propose changes.
-22. The infrastructure automatically configures **DNS** for new hostnames. ([AUTO](#auto))
+Access to the infrastructure must be restricted to authorized persons.
+Preferable, only automated processes have access to change the infrastructure (see requirement 17).
 
-#### 24. The infrastructure **automatically scales** up and down within set limits when application usage requires it. ([AUTO](#auto))
+### 16. The infrastructure supports _zero-downtime deployments_. ([REL](#rel))
 
-In the case of vertical scaling (scaling in and out) this requires load-balancing the requests to the instances.
+When new versions of the applications are deployed (requirement 9),
+this should happen without service interruption.
+Solutions include [Blue/Green](https://martinfowler.com/bliki/BlueGreenDeployment.html) or Rolling Updates.
 
-### Could have
+### 17. The infrastructure configuration is _declared in code_. ([AUTO](#auto))
 
-24. The infrastructure has an optimized way of hosting **static files** (useful for static HTML/JavaScript applications).
+The infrastructure’s state is not the result of manual interventions (for example, running one-off commands),
+but a reflection of the configuration as it is declared in code.
+Changes made to that code are automatically rolled out,
+an approach known as [Infrastructure as Code (IaC)](https://en.wikipedia.org/wiki/Infrastructure_as_code).
+
+Having the configuration as code makes it transparent and declarative.
+Preferably, the code is opened up to developers, so they can view it and propose the changes to it that are needed to run their applications.
+
+### 19. The infrastructure _captures metrics_. ([REL](#rel))
+
+Logs (requirement 5) are used to diagnose and fix problems that have already occurred.
+Metrics, on the other hand, help prevent failures. 
+They are values that measure the infrastructure resources and applications.
+For example by measuring CPU usage, capacity can be increased in time so user service will not be interrupted.
+
+### 20. The infrastructure _sends alerts_. ([AUTO](#auto))
+
+Having a centralized place to view logs (requirement 6) is only part of a monitoring solution.
+Viewing logs is pull-based, so a push mechanism for software failure notifications, on channels such as e-mail or Slack, must be added. 
+The infrastructure, therefore, must have a way to send out alerts based on both logs and metrics thresholds.
+
+### 21. The application repository is _open source_. ([REL](#rel))
+
+Collaboration between developers, both inside and outside the organisation, yields reliable software.
+The ability to quickly and transparently report and fix bugs engages software developers with the application.
+It is therefore best if anyone can submit issues and propose changes.
+
+### 22. The infrastructure automatically configures _DNS_. ([AUTO](#auto))
+
+Automating all steps for launching new applications (including registering new hostnames and configuring DNS records)
+makes that process more reliable.
+
+### 23. The infrastructure _automatically scales_ when usage changes. ([AUTO](#auto))
+
+When usage of the application increases and decreases, the infrastructure automatically adjusts capacity within set limits.
+
+In the case of horizontal scaling (scaling in and out) this requires load-balancing the requests to the instances.
+
+### 24. The infrastructure has an optimized way of hosting _static files_. ([REL](#rel))
+
+If the infrastructure is able to directly serve static files, without configuring a web server first,
+this speeds up delivery. 
+Moreover, caching these files in a third-party Content Delivery Network (CDN) will reduce latency for users.
+This is useful mainly for static HTML/JavaScript applications.
