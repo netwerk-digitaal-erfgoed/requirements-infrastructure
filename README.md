@@ -68,9 +68,10 @@ Both software developers and end-users need reliable and performant services to 
     <dt>User</dt>
     <dd>
         Users of the application can be:
-        - primary: persons who use the application, either directly or through a demonstrator;
-        - secondary: other software that uses the applications on behalf of the primary users.
-          For instance: a Collection Management System that connects to the application.
+        <ul>
+            <li>primary: persons who use the application, either directly or through a demonstrator;</li>
+            <li>secondary: other software that uses the applications on behalf of the primary users. For instance: a Collection Management System that connects to the application.</li>
+        </ul>    
     </dd>
 </dl>
 
