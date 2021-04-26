@@ -28,7 +28,7 @@ The infrastructure, in turn, should not have to change to accommodate the applic
 ### AUTO 
 
 Processes are automated, which strengthens transparency and prevents human error;
-for example the application code is built automatically when commits are pushed to the application repository,
+for example the application code is built automatically when commits are pushed to the application repository.
 
 ### REL
 
