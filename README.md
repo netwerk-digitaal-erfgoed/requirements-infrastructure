@@ -94,7 +94,7 @@ The same container can be run on any Linux distribution as well as on a develope
 ### 2. The infrastructure connects to a **container registry**. ([SEP](#sep))
 
 Built containers  (see requirement 7) are pushed to a container registry.
-This can be an external registry, such as as [GHCR](https://github.com/features/packages)
+This can be an external registry, such as [GHCR](https://github.com/features/packages)
 or one provided by the infrastructure itself.
 
 The built artifacts must be accessible not only to the infrastructure itself but also to outside collaborators,
