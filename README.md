@@ -164,10 +164,12 @@ Data loss is unacceptable, especially when that data has been provided by users.
 
 If the infrastructure stores personal data, for instance logs, this must be done in a GDPR-compliant manner.
 
-### 15. Access to the infrastructure is _restricted_. ([REL](#rel))
+### 15. The infrastructure is _secure_. ([REL](#rel))
 
 Access to the infrastructure must be restricted to authorized persons.
-Preferable, only automated processes have access to change the infrastructure (see requirement 17).
+Preferably, only automated processes have access to change the infrastructure (see requirement 17).
+
+All infrastructure and application components (such as containers) are automatically scanned for security vulnerabilities.
 
 ### 16. The infrastructure supports _zero-downtime deployments_. ([REL](#rel))
 
