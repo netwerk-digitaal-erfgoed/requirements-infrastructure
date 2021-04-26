@@ -109,6 +109,7 @@ For the latter to work, the infrastructure must be able to persist data between 
 
 Configuration values (such as database connection strings or API URLs) must be parameterized.
 The best way to do so is with [environment variables](https://12factor.net/config), a language- and OS-agnostic standard.
+The infrastructure must therefore support providing these environment variables to the application.
 
 ### 5. The infrastructure _captures application logs_ at stdout. ([SEP](#sep))
 
