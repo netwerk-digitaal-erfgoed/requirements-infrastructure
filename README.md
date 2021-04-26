@@ -7,13 +7,23 @@
 
 ## Introduction
 
-This document describes requirements for hosting applications that have been developed by Netwerk Digitaal Erfgoed (NDE).
-This document is aimed at organisations that would like to take ownership of (‘borgen’) NDE Bruikbaar applications.
+Netwerk Digitaal Erfgoed (NDE) develops applications that are foundational services in the heritage network,
+including the [Network of Terms](https://termennetwerk.netwerkdigitaalerfgoed.nl/faq) and [Register](https://demo.netwerkdigitaalerfgoed.nl/register-api/static/index.html).
 
+The user adoption of applications depends not only on their usefulness and quality,
+but also on their reliability and performance.
+When applications are slow or buggy, users will drop out.
+For foundational services such as those delivered by NDE, on which large groups of users depend,
+this problem is even more prominent.
+
+Infrastructure plays and important role in delivering reliable software. 
+This document describes requirements for a fault tolerant, performant and reliable infrastructure.
 The requirements are based on modern DevOps best practices, including [Twelve-Factor](https://12factor.net).
 The [current NDE infrastructure](https://github.com/netwerk-digitaal-erfgoed/infrastructure) is based on these requirements.
+
+This document is aimed at organisations that would like to take ownership of (‘borgen’) NDE applications.
 By joining us in following these practices,
-organisations will help enable the longevity and adoption of the applications.
+organisations will contribute to the longevity and adoption of the applications.
 
 ## Principles
 
