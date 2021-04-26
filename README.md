@@ -141,7 +141,9 @@ Preferably, code changes that have been committed, tested (requirements 7 and 8)
 
 ### 10. The infrastructure is _highly available_ corresponding to the infrastructure supplier’s SLA ([REL](#rel))
 
-At the very least there is no single point of failure and all components are redundant.
+The infrastructure absorbs faults so local problems in infrastructure components do not lead to failures that users will notice.
+For instance, when a server crashes or becomes unreachable, the infrastructure automatically migrates the applications to another server.
+The application remains available with as little interruption as possible.
 
 ### 11. The infrastructure exposes applications at _public HTTPS web endpoints_.
 
