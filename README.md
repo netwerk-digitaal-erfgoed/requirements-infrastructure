@@ -49,7 +49,7 @@ Both software developers and end-users need reliable and performant services to 
 
 <dl>
     <dt>Infrastructure</dt>
-    <dd>The set of components that enable serving applications to the public.
+    <dd>The set of components that enable serving applications to users.
       Functions include not just an execution environment but also continuous integration, deployment and monitoring.
       These functions may be delivered by a single component or be spread over multiple components (for instance, GitHub Actions as a CI pipeline, hosting on a cluster).
     </dd>
@@ -64,6 +64,13 @@ Both software developers and end-users need reliable and performant services to 
     <dt>Container</dt>
     <dd>A package that contains both the application and its dependencies, 
         standardized by the <a href="https://opencontainers.org">Open Container Initiative (OCI)</a>.
+    </dd>
+    <dt>User</dt>
+    <dd>
+        Users of the application can be:
+        - primary: persons who use the application, either directly or through a demonstrator;
+        - secondary: other software that uses the applications on behalf of the primary users.
+          For instance: a Collection Management System that connects to the application.
     </dd>
 </dl>
 
