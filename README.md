@@ -11,7 +11,7 @@ This document describes requirements for hosting applications that have been dev
 This document is aimed at organisations that would like to take ownership of (‘borgen’) NDE Bruikbaar applications.
 
 The requirements are based on modern DevOps best practices, including [Twelve-Factor](https://12factor.net).
-They have inspired the [current NDE infrastructure](https://github.com/netwerk-digitaal-erfgoed/infrastructure).
+The [current NDE infrastructure](https://github.com/netwerk-digitaal-erfgoed/infrastructure) is based on these requirements.
 By joining us in following these practices,
 organisations will help enable the longevity and adoption of the applications.
 
