@@ -117,11 +117,12 @@ Traditionally, logs are written by applications to a log file or an API (such as
 This couples the application to the infrastructure it runs on.
 To safeguard proper separation, the infrastructure must capture application logs at the [standard output stream](https://12factor.net/logs) (`stdout`). 
 
-### 6. The infrastructure _aggregates logs_ and makes them available through a command-line and/or web interface. ([REL](#rel))
+### 6. The infrastructure _aggregates logs_. ([REL](#rel))
 
 To see what is going on in the running application (observability),
 developers as well as operations must be able to search through logs efficiently.
 This is especially relevant when multiple container instances of the application are running in parallel.
+Logs can be made available through a command-line and/or a web interface.
 
 ### 7. The infrastructure _automatically builds_ the application. ([AUTO](#auto))
 
