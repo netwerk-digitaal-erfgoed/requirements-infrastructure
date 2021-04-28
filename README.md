@@ -90,7 +90,8 @@ The requirements are prioritized. Priorities follow the [MoSCoW method](https://
 Containers are a form of lightweight virtualization, striking a good balance between isolation and performance.
 Containers are self-sufficient (without external dependencies) and uniform (they look the same on the outside).
 This makes them decoupled from infrastructure specifics (such as the OS used by the infrastructure provider).
-The same container can be run on any Linux distribution as well as on a developer’s local Mac or Windows machine.
+The same container can be run on any Linux distribution, cloud provider (including AWS, Azure, Google and DigitalOcean)
+as well as on a developer’s local Mac or Windows machine.
 
 ### 2. The infrastructure connects to a **container registry**. ([SEP](#sep))
 
