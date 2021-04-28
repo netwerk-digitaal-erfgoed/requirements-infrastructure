@@ -171,6 +171,8 @@ Preferably, only automated processes have access to change the infrastructure (s
 
 All infrastructure and application components (such as containers) are automatically scanned for security vulnerabilities.
 
+All software components, including the infrastructure’s OS and other packages, are continuously updated to incorporate security patches.
+
 ### 16. The infrastructure supports _zero-downtime deployments_. ([REL](#rel))
 
 When new versions of the applications are deployed (requirement 9),
