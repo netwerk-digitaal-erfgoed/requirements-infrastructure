@@ -16,7 +16,7 @@ When applications are slow or buggy, users will drop out.
 For foundational services such as those delivered by NDE, on which large groups of users depend,
 this problem is even more prominent.
 
-Infrastructure plays and important role in delivering reliable software. 
+Infrastructure plays an important role in delivering reliable software. 
 This document describes requirements for a fault tolerant, performant and reliable infrastructure.
 The requirements are based on modern DevOps best practices, including [Twelve-Factor](https://12factor.net).
 The [current NDE infrastructure](https://github.com/netwerk-digitaal-erfgoed/infrastructure) is based on these requirements.
@@ -85,7 +85,7 @@ The requirements are prioritized. Priorities follow the [MoSCoW method](https://
 | Should have | The requirement is important, but not necessary | Requirements 16 – 22 | 
 | Could have  | The requirement is desired, but not important   | Requirement 23             |
 
-### 1. The infrastructure can run applications that are packaged as _OCI containers_. (Must have, [SEP](#sep))
+### 1. The infrastructure runs applications that are packaged as _OCI containers_. (Must have, [SEP](#sep))
 
 Containers are a form of lightweight virtualization, striking a good balance between isolation and performance.
 Containers are self-sufficient (without external dependencies) and uniform (they look the same on the outside).
@@ -107,7 +107,7 @@ who can then run those same containers locally (see requirement 1).
 The infrastructure can run both stateless applications (that store no state) and stateful applications, such as triple stores.
 For the latter to work, the infrastructure must be able to persist data between application runs (for instance on data volumes). 
 
-### 4. The infrastructure can _configure applications_ through environment variables. (Must have, [SEP](#sep))
+### 4. The infrastructure _configures applications_ through environment variables. (Must have, [SEP](#sep))
 
 Configuration values (such as database connection strings or API URLs) must be parameterized.
 The best way to do so is with [environment variables](https://12factor.net/config), a language- and OS-agnostic standard.
