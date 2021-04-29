@@ -196,6 +196,7 @@ Logs (requirement 5) are used to diagnose and fix problems that have already occ
 Metrics, on the other hand, help prevent failures. 
 They are values that measure the infrastructure resources and applications.
 For example by measuring CPU usage, capacity can be increased in time so user service will not be interrupted.
+Like log output (requirement 6), the metrics must be made available for reporting and analysis, preferably in a web interface.
 
 ### 19. The infrastructure _sends alerts_. (Should have, [AUTO](#auto))
 
