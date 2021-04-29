@@ -35,15 +35,36 @@ A clear separation between the application and the infrastructure it runs on.
 The application code should not contain infrastructure specifics and be portable so application instances can be hosted by multiple parties, including developers that want to run or debug the application locally.
 The infrastructure, in turn, should not have to change to accommodate the application.
 
+#### Example 
+
+An infrastructure provider runs the Red Hat Linux distribution and require developers to package their applications as RPMs.
+This violates the SEP principle because the artifact that is deployed is no longer portable to other, non-Red Hat, environments.
+
 ### AUTO 
 
-Processes are automated, which strengthens transparency and prevents human error;
-for example the application code is built automatically when commits are pushed to the application repository.
+Processes are automated, which strengthens transparency, prevents human error and reduces the lead time between a feature request,
+code changes to build that feature, and the availability of the feature to users.
+
+#### Example
+
+When a new application needs to be deployed, system administrators manually configure a server and copy the code to it.
+When changes are made to the application code, developers have to ask administrators to deploy the latest code version.
+This slows down delivery times and therefore violates the AUTO principle.
+A better way would be to automatically build and deploy the application when commits are pushed to the application repository.
 
 ### REL
 
 The infrastructure is reliable, which helps adoption of the applications.
 Both software developers and end-users need reliable and performant services to get their work done.
+
+#### Example
+
+An infrastructure provider hosts many applications on a single virtual machine (VM).
+Application usage increases, and so does server load. 
+To increase the VM’s resources, the system administrator takes down the VM and deploys a larger instance.
+During that time the applications are unavailable to users. 
+This violates the REL principle.
+Horizontal scaling, by running multiple application containers in parallel, would solve this issue.
 
 ## Definitions
 
