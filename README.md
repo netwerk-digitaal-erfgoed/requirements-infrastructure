@@ -50,7 +50,7 @@ Both software developers and end-users need reliable and performant services to 
 <dl>
     <dt>Infrastructure</dt>
     <dd>The set of components that enable serving applications to users.
-      Functions include not just an execution environment but also continuous integration, deployment and monitoring.
+      Functions include not just an execution environment but also code repositories, continuous integration, deployment and monitoring.
       These functions may be delivered by a single component or be spread over multiple components (for instance, GitHub Actions as a CI pipeline, hosting on a cluster).
     </dd>
     <dt>Application</dt>
