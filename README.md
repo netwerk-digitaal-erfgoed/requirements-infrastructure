@@ -18,7 +18,8 @@ this problem is even more prominent.
 
 Infrastructure plays an important role in delivering reliable software. 
 This document describes requirements for a fault tolerant, performant and reliable infrastructure.
-The requirements are based on modern DevOps best practices, including [Twelve-Factor](https://12factor.net).
+The requirements are based on modern DevOps and other best practices, including [Twelve-Factor](https://12factor.net)
+and [FAIR4RS](https://www.rd-alliance.org/system/files/FAIR4RS_Principles_v0.3_RDA-RFC.pdf).
 The [current NDE infrastructure](https://github.com/netwerk-digitaal-erfgoed/infrastructure) is based on these requirements.
 
 This document is aimed at organisations that would like to take ownership of (‘borgen’) NDE applications.
@@ -121,7 +122,8 @@ This can be an external registry, such as [GHCR](https://github.com/features/pac
 or one provided by the infrastructure itself.
 
 The built artifacts must be accessible not only to the infrastructure itself but also to outside collaborators,
-who can then run those same containers locally (see requirement 1).
+who can then [access and reuse](https://www.rd-alliance.org/system/files/FAIR4RS_Principles_v0.3_RDA-RFC.pdf) those same containers,
+for example to run them locally (see requirement 1).
 
 ### 3. The infrastructure runs _stateful applications_. (Must have)
 
