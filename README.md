@@ -1,5 +1,7 @@
 # Requirements for NDE application infrastructure
 
+## ⚠️ This document has been promoted to, and is superseded by, the [CLARIAH Infrastructure Requirements](https://github.com/CLARIAH/clariah-plus/blob/main/requirements/infrastructure-requirements.md). 
+
 * [Introduction](#introduction)
 * [Principles](#principles)
 * [Definitions](#definitions)
